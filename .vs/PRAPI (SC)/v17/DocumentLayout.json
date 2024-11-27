@@ -1,0 +1,53 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Unity\\Unity Projects\\PRAPI (SC)\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{C2B6DAB4-1C34-B32F-95F3-C07DFC27F708}|Assembly-CSharp.csproj|d:\\unity\\unity projects\\prapi (sc)\\assets\\playernetwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C2B6DAB4-1C34-B32F-95F3-C07DFC27F708}|Assembly-CSharp.csproj|solutionrelative:assets\\playernetwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2B6DAB4-1C34-B32F-95F3-C07DFC27F708}|Assembly-CSharp.csproj|D:\\Unity\\Unity Projects\\PRAPI (SC)\\assets\\networkmanagerui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C2B6DAB4-1C34-B32F-95F3-C07DFC27F708}|Assembly-CSharp.csproj|solutionrelative:assets\\networkmanagerui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "PlayerNetwork.cs",
+              "DocumentMoniker": "D:\\Unity\\Unity Projects\\PRAPI (SC)\\Assets\\PlayerNetwork.cs",
+              "RelativeDocumentMoniker": "Assets\\PlayerNetwork.cs",
+              "ToolTip": "D:\\Unity\\Unity Projects\\PRAPI (SC)\\Assets\\PlayerNetwork.cs",
+              "RelativeToolTip": "Assets\\PlayerNetwork.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-27T19:17:29.786Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "NetworkManagerUI.cs",
+              "DocumentMoniker": "D:\\Unity\\Unity Projects\\PRAPI (SC)\\Assets\\NetworkManagerUI.cs",
+              "RelativeDocumentMoniker": "Assets\\NetworkManagerUI.cs",
+              "ToolTip": "D:\\Unity\\Unity Projects\\PRAPI (SC)\\Assets\\NetworkManagerUI.cs",
+              "RelativeToolTip": "Assets\\NetworkManagerUI.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABUAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-27T18:45:26.102Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
