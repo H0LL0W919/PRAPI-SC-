@@ -6,12 +6,15 @@ using Unity.Netcode;
 
 public class NetworkManagerUI : MonoBehaviour
 {
+
     [SerializeField] private Button serverButton;
     [SerializeField] private Button hostButton;
     [SerializeField] private Button clientButton;
 
+
     private void Awake()
     {
+
         serverButton.onClick.AddListener(() => {
             NetworkManager.Singleton.StartServer();
         });
@@ -22,4 +25,5 @@ public class NetworkManagerUI : MonoBehaviour
             NetworkManager.Singleton.StartClient();
         });
     }
+        
 }
