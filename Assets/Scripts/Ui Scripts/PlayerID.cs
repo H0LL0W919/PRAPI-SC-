@@ -15,7 +15,10 @@ public class PlayerID : NetworkBehaviour
     [SerializeField] private NetworkVariable<FixedString32Bytes> playerTeam = new NetworkVariable<FixedString32Bytes>("", NetworkVariableReadPermission.Everyone);
     [SerializeField] private TMP_Text nameHeader;
 
-
+    void Start()
+    {
+        Debug.Log($"Player {playerName.Value} is on team {playerTeam.Value}");
+    }
     public override void OnNetworkSpawn()
     {
         nameTag = GameObject.Find("Canvas").GetComponent<NameTag>();
@@ -26,10 +29,12 @@ public class PlayerID : NetworkBehaviour
         if (IsServer)
         {
             SetName(nameTag.Name);
-            
-            // Randomly assign the player to a team
-            AssignRandomTeam();
-            
+
+            if (playerTeam.Value == "") // Assign a team if not already assigned
+            {
+                AssignRandomTeam();
+            }
+
             SetHeaderName(playerName.Value);
             ClearListHost();
             Debug.Log("Host");
@@ -37,20 +42,26 @@ public class PlayerID : NetworkBehaviour
         else
         {
             SetNameServerRpc(nameTag.Name);
-            Debug.Log("Client");
 
             // Request the server to assign a random team for the client
             AssignRandomTeamServerRpc();
             Debug.Log("Client");
         }
+        
+        SetHeaderNameClientRpc(playerName.Value + " - Team: " + playerTeam.Value);
+
     }
+
 
     // Assigns a random team to the player (server-side)
     private void AssignRandomTeam()
     {
-        string team = Random.Range(0, 2) == 0 ? "Red" : "Blue";
-        playerTeam.Value = new FixedString32Bytes(team);
-        Debug.Log($"Assigned {playerName.Value} to team {team}");
+        if (IsServer)
+        {
+            string team = Random.Range(0, 2) == 0 ? "Red" : "Blue";
+            playerTeam.Value = new FixedString32Bytes(team);
+            Debug.Log($"Assigned {playerName.Value} to team {team}");
+        }
     }
 
     // ServerRpc to assign a random team to the player (called by clients)

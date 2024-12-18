@@ -63,9 +63,10 @@ public class TeamChat : NetworkBehaviour
     {
 
         // Check if the current player is on the same team
+        Debug.Log($"Broadcasting message to team {team}: {message}");
         if (playerID.PlayerTeam.ToString() == team)
         {
-
+            Debug.Log($"Message received by player {playerID.PlayerName} on team {playerID.PlayerTeam}");
             chatDisplay.text += message + "\n";
         }
 

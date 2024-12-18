@@ -13,7 +13,7 @@ public class PlayerListText : NetworkBehaviour
     [SerializeField] private TMP_Text textPrefab;
 
     [SerializeField] private List<TMP_Text> textList = new List<TMP_Text>();
-    [SerializeField] public List<FixedString32Bytes> playerList = new List<FixedString32Bytes>();
+    [SerializeField] public List<string> playerList = new List<string>();
 
  
     public override void OnNetworkSpawn()
@@ -23,34 +23,31 @@ public class PlayerListText : NetworkBehaviour
     }
 
     //Creates a text prefab for the player's name and adds it to the list 
-    public void UpdateOnScreenList(FixedString32Bytes name)
+    // Creates a text prefab for the player's name and team, adds it to the list
+    public void UpdateOnScreenList(string playerEntry)
     {
-        textPrefab.text = name.ToString();
+        textPrefab.text = playerEntry;
         TMP_Text nameTag = Instantiate(textPrefab, playerListBox.transform);
         textList.Add(nameTag);
     }
 
-
-    //Clears the list
+    // Clears the list
     public void ClearOnScreenList()
     {
-        for (int i = 0; i < textList.Count; ++i)
+        foreach (var text in textList)
         {
-            Debug.Log("cleared list");
-            Destroy(textList[i].gameObject);
+            Destroy(text.gameObject);
         }
         textList.Clear();
     }
 
 
-
-    //Adds player name to each client's screen
+    // Adds player name and team to each client's screen
     [ClientRpc]
-    public void UpdateOnScreenListClientRpc(FixedString32Bytes name)
+    public void UpdateOnScreenListClientRpc(string playerEntry)
     {
-        UpdateOnScreenList(name);
+        UpdateOnScreenList(playerEntry);
     }
-
 
     //Clears each client's list
     [ClientRpc]
@@ -66,36 +63,35 @@ public class PlayerListText : NetworkBehaviour
     {
         if (IsServer)
         {
-            UpdatePlayerList(playerList);
+            UpdatePlayerList();
 
-            for (int i = 0; i < playerList.Count; i++)
+            // Declare hostClient only once
+            NetworkManager.Singleton.ConnectedClients.TryGetValue(0, out var hostClient);
+
+            foreach (string playerEntry in playerList)
             {
-                UpdateOnScreenListClientRpc(playerList[i]);
+                UpdateOnScreenListClientRpc(playerEntry);
 
-                //This code checks if the host owns a Player Object, if not the server screen will update
-                NetworkManager.Singleton.ConnectedClients.TryGetValue(0, out var hostClient);
-
+                // Use the already declared hostClient variable
                 if (hostClient == null)
                 {
-                    UpdateOnScreenList(playerList[i]);
+                    UpdateOnScreenList(playerEntry);
                 }
-
             }
         }
     }
 
 
 
-
-
     //Updates player list and player header for each client when called
-    private void UpdatePlayerList(List<FixedString32Bytes> list)
+    private void UpdatePlayerList()
     {
         if (!IsServer) return;
 
         playerList.Clear();
         ClearOnScreenListClientRpc();
 
+        // If the host is not connected, clear the list manually
         NetworkManager.Singleton.ConnectedClients.TryGetValue(0, out var hostClient);
 
         if (hostClient == null)
@@ -115,30 +111,18 @@ public class PlayerListText : NetworkBehaviour
 
                 if (playerID != null)
                 {
-                    if (playerList.Count > 0)
-                    {
-                        //This changes the player's name if it already exists in the server
-                        for (int i = 0; i < playerList.Count; i++)
-                        {
-                            if (playerID.PlayerName == playerList[i])
-                            {
-                                playerID.ChangeName(i);
-                            }
-                        }
-                    }
+                    string playerEntry = $"{playerID.PlayerName.ToString()} - Team: {playerID.PlayerTeam.ToString()}";
 
-                    Debug.Log(playerID.PlayerName);
+                    playerList.Add(playerEntry);
 
-                    list.Add(playerID.PlayerName);
+                    // Update the player's header
+                    playerID.SetHeaderNameClientRpc(playerEntry);
 
-                    playerID.playerListText.playerList = list;
-                    playerID.SetHeaderNameClientRpc(playerID.PlayerName);
-
+                    // Use NetworkManager.Singleton.ConnectedClients.TryGetValue(0, out var hostClient) only once
                     if (hostClient == null)
                     {
-                        playerID.SetHeaderName(playerID.PlayerName);
+                        playerID.SetHeaderName(playerEntry);
                     }
-
                 }
             }
         }
@@ -150,50 +134,47 @@ public class PlayerListText : NetworkBehaviour
     {
         if (!IsServer) return;
 
-        var client = NetworkManager.Singleton.ConnectedClients[clientID];
-        PlayerID playerID = client.PlayerObject.GetComponent<PlayerID>();
-
-        if (playerID != null)
+        if (NetworkManager.Singleton.ConnectedClients.TryGetValue(clientID, out var client))
         {
-            FixedString32Bytes playerToRemove = playerID.PlayerName;
+            PlayerID playerID = client.PlayerObject.GetComponent<PlayerID>();
 
-            Debug.Log(playerToRemove.ToString());
-            RemoveFromList(playerToRemove);
+            if (playerID != null)
+            {
+                string playerToRemove = $"{playerID.PlayerName} - Team: {playerID.PlayerTeam}";
+                RemoveFromList(playerToRemove);
+            }
         }
     }
 
 
 
     //Removes disconnecting client's name from list
-    public void RemoveFromList(FixedString32Bytes playerToRemove)
+    public void RemoveFromList(string playerToRemove)
     {
         if (!IsServer) return;
         
-        NetworkManager.Singleton.ConnectedClients.TryGetValue(0, out var hostClient);
 
         ClearOnScreenListClientRpc();
 
-        if (hostClient == null)
+        if (NetworkManager.Singleton.ConnectedClients.TryGetValue(0, out var hostClient) == false)
         {
             ClearOnScreenList();
         }
 
-        for (int i = 0; i < playerList.Count; i++)
+        foreach (var playerEntry in new List<string>(playerList))
         {
-            if (playerList[i] != playerToRemove)
+            if (playerEntry != playerToRemove)
             {
-                UpdateOnScreenListClientRpc(playerList[i]);
+                UpdateOnScreenListClientRpc(playerEntry);
 
                 if (hostClient == null)
                 {
-                    UpdateOnScreenList(playerList[i]);
+                    UpdateOnScreenList(playerEntry);
                 }
             }
             else
             {
-                playerList.Remove(playerList[i]);
-
-                i-= 1;
+                playerList.Remove(playerEntry);
             }
         }
     }
