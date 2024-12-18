@@ -31,22 +31,22 @@ public class TeamChat : NetworkBehaviour
 
         if (playerID != null && !playerID.IsOwner)
         {
-            chatInputField.interactable = false;
+            chatInputField.interactable = true;
         }
     }
 
     
     void Update()
     {
-       // If the player presses Enter and the input field has text
+        // If the player presses Enter and the input field has text
         if (IsOwner && Input.GetKeyDown(KeyCode.Return) && !string.IsNullOrEmpty(chatInputField.text))
         {
             string message = chatInputField.text;
-            chatInputField.text = "";
+            chatInputField.text = ""; // Clear input field after sending
 
             // Send the message to the server
             SendMessageServerRpc(message, playerID.PlayerTeam.ToString());
-        } 
+        }
     }
 
     // Sends a message to the server with the player's team

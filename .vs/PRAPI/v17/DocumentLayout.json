@@ -3,11 +3,15 @@
   "WorkspaceRootPath": "D:\\games\\PRAPI\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{30306A8B-E8DF-C1DF-75C3-38515E6063EA}|Assembly-CSharp.csproj|d:\\games\\prapi\\assets\\scripts\\ui scripts\\playerid.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{30306A8B-E8DF-C1DF-75C3-38515E6063EA}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\ui scripts\\playerid.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{30306A8B-E8DF-C1DF-75C3-38515E6063EA}|Assembly-CSharp.csproj|d:\\games\\prapi\\assets\\scripts\\ui scripts\\teamchat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{30306A8B-E8DF-C1DF-75C3-38515E6063EA}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\ui scripts\\teamchat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{30306A8B-E8DF-C1DF-75C3-38515E6063EA}|Assembly-CSharp.csproj|d:\\games\\prapi\\assets\\scripts\\ui scripts\\chatuimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{30306A8B-E8DF-C1DF-75C3-38515E6063EA}|Assembly-CSharp.csproj|D:\\games\\PRAPI\\assets\\scripts\\ui scripts\\chatuimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{30306A8B-E8DF-C1DF-75C3-38515E6063EA}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\ui scripts\\chatuimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -18,11 +22,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
+              "Title": "PlayerID.cs",
+              "DocumentMoniker": "D:\\games\\PRAPI\\Assets\\Scripts\\Ui Scripts\\PlayerID.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Ui Scripts\\PlayerID.cs",
+              "ToolTip": "D:\\games\\PRAPI\\Assets\\Scripts\\Ui Scripts\\PlayerID.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Ui Scripts\\PlayerID.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-18T19:14:25.099Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "ChatUIManager.cs",
               "DocumentMoniker": "D:\\games\\PRAPI\\Assets\\Scripts\\Ui Scripts\\ChatUIManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Ui Scripts\\ChatUIManager.cs",
@@ -30,18 +47,17 @@
               "RelativeToolTip": "Assets\\Scripts\\Ui Scripts\\ChatUIManager.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-18T16:00:47.6Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-18T16:00:47.6Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "TeamChat.cs",
               "DocumentMoniker": "D:\\games\\PRAPI\\Assets\\Scripts\\Ui Scripts\\TeamChat.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Ui Scripts\\TeamChat.cs",
               "ToolTip": "D:\\games\\PRAPI\\Assets\\Scripts\\Ui Scripts\\TeamChat.cs",
               "RelativeToolTip": "Assets\\Scripts\\Ui Scripts\\TeamChat.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAQwB8AAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-18T15:51:22.477Z",
               "EditorCaption": ""
