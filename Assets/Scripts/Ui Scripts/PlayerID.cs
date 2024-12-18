@@ -12,6 +12,7 @@ public class PlayerID : NetworkBehaviour
     public PlayerListText playerListText;
 
     [SerializeField] private NetworkVariable<FixedString32Bytes> playerName = new NetworkVariable<FixedString32Bytes>("Player", NetworkVariableReadPermission.Everyone);
+    [SerializeField] private NetworkVariable<FixedString32Bytes> playerTeam = new NetworkVariable<FixedString32Bytes>("", NetworkVariableReadPermission.Everyone);
     [SerializeField] private TMP_Text nameHeader;
 
 
@@ -25,6 +26,10 @@ public class PlayerID : NetworkBehaviour
         if (IsServer)
         {
             SetName(nameTag.Name);
+            
+            // Randomly assign the player to a team
+            AssignRandomTeam();
+            
             SetHeaderName(playerName.Value);
             ClearListHost();
             Debug.Log("Host");
@@ -33,14 +38,34 @@ public class PlayerID : NetworkBehaviour
         {
             SetNameServerRpc(nameTag.Name);
             Debug.Log("Client");
+
+            // Request the server to assign a random team for the client
+            AssignRandomTeamServerRpc();
+            Debug.Log("Client");
         }
     }
+
+    // Assigns a random team to the player (server-side)
+    private void AssignRandomTeam()
+    {
+        string team = Random.Range(0, 2) == 0 ? "Red" : "Blue";
+        playerTeam.Value = new FixedString32Bytes(team);
+        Debug.Log($"Assigned {playerName.Value} to team {team}");
+    }
+
+    // ServerRpc to assign a random team to the player (called by clients)
+    [ServerRpc]
+    private void AssignRandomTeamServerRpc()
+    {
+        AssignRandomTeam();
+    }
+
 
     //Sets list for host
     private void ClearListHost()
     {
         playerListText.ClearOnScreenList();
-        playerListText.UpdateOnScreenList(playerName.Value);
+        playerListText.UpdateOnScreenList(playerName.Value + " - Team: " + playerTeam.Value);
     }
 
 
@@ -89,4 +114,8 @@ public class PlayerID : NetworkBehaviour
         get { return playerName.Value; }
     }
 
+    public FixedString32Bytes PlayerTeam
+    {
+        get { return playerTeam.Value; }
+    }
 }
